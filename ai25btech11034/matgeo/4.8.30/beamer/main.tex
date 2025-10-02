@@ -1,0 +1,194 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{txfonts}
+\usepackage{tkz-euclide}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{gvv}
+\usepackage{lmodern}
+\usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\setbeamertemplate{page number in head/foot}[totalframenumber]
+
+\usepackage{tcolorbox}
+\tcbuselibrary{minted,breakable,xparse,skins}
+
+
+
+\definecolor{bg}{gray}{0.95}
+\DeclareTCBListing{mintedbox}{O{}m!O{}}{%
+  breakable=true,
+  listing engine=minted,
+  listing only,
+  minted language=#2,
+  minted style=default,
+  minted options={%
+    linenos,
+    gobble=0,
+    breaklines=true,
+    breakafter=,,
+    fontsize=\small,
+    numbersep=8pt,
+    #1},
+  boxsep=0pt,
+  left skip=0pt,
+  right skip=0pt,
+  left=25pt,
+  right=0pt,
+  top=3pt,
+  bottom=3pt,
+  arc=5pt,
+  leftrule=0pt,
+  rightrule=0pt,
+  bottomrule=2pt,
+  toprule=2pt,
+  colback=bg,
+  colframe=orange!70,
+  enhanced,
+  overlay={%
+    \begin{tcbclipinterior}
+    \fill[orange!20!white] (frame.south west) rectangle ([xshift=20pt]frame.north west);
+    \end{tcbclipinterior}},
+  #3,
+}
+\lstset{
+    language=C,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{green!60!black},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    showstringspaces=false,
+}
+%------------------------------------------------------------
+
+\title
+{4.8.30}
+\author 
+{AI25BTECH11034 - Sujal Chauhan }
+
+
+
+\begin{document}
+
+\frame{\titlepage}
+\begin{frame}{Question}
+
+Find the equation of a line passing through the point (2,3,2) and parallel to the line \\
+$\Vec{r}= (-2\hat{i}+3\hat{j})+\lambda(2\hat{i}-3\hat{j}+6\hat{k})$. Also, find the distance beteween these two lines.\\[2cm]
+\end{frame}
+\begin{frame}{Theory:}
+
+
+Consider two parallel lines in 3D:
+\begin{align}
+    \vec{r}_1 &= \vec{a}_1 + \lambda \vec{b}, \quad \lambda \in \mathbb{R}, \\[6pt]
+    \vec{r}_2 &= \vec{a}_2 + \mu \vec{b}, \quad \mu \in \mathbb{R},
+\end{align}
+where $\vec{a}_1, \vec{a}_2$ are points on the respective lines and $\vec{b}$ is the common direction vector.  
+
+
+Shortest distance between them can be given by :
+\begin{align}
+    d^2 
+    &= (\vec{a_2} - \vec{a_1})^\top (\vec{a_2} - \vec{a_1})
+    - \left( \frac{ (\vec{a_2} - \vec{a_1})^\top \vec{b} }{ \lVert \vec{b} \rVert } \right)^2
+\end{align}
+Now we can calculate d.
+\end{frame}
+
+\begin{frame}{Solution:}
+
+
+
+The direction vector of the given parallel lines is
+\begin{align}
+    \vec{b} = \myvec{2 \\ -3 \\ 6}.
+\end{align}
+
+The first line is given by
+\begin{align}
+    \vec{r}_1 = \myvec{2 \\ 3 \\ 2} + \mu \myvec{2 \\ -3 \\ 6}, \quad \mu \in \mathbb{R}.
+\end{align}
+
+The second line is
+\begin{align}
+    \vec{r}_2 = \myvec{-2 \\ 3 \\ 0} + \lambda \myvec{2 \\ -3 \\ 6}, \quad \lambda \in \mathbb{R}.
+\end{align}
+\end{frame}
+\begin{frame}
+Now, we compute the difference between the position vectors $\vec{a}_1$ and $\vec{a}_2$:
+\begin{align}
+    \vec{a}_2 - \vec{a}_1 
+    = \myvec{-2 \\ 3 \\ 0} - \myvec{2 \\ 3 \\ 2} 
+    = \myvec{-4 \\ 0 \\ -2}.
+\end{align}
+
+Next, we calculate the required components for the distance formula.
+The squared magnitude of $(\vec{a}_2 - \vec{a}_1)$ is:
+\begin{align}
+    (\vec{a}_2 - \vec{a}_1)^\top (\vec{a}_2 - \vec{a}_1) &= \lVert \vec{a}_2 - \vec{a}_1 \rVert^2 \\
+    &= (-4)^2 + (0)^2 + (-2)^2 \\
+    &= 16 + 0 + 4 = 20.
+\end{align}
+\end{frame}
+\begin{frame}
+
+\begin{align}
+    (\vec{a}_2 - \vec{a}_1)^\top \vec{b} &= \myvec{-4 & 0 & -2} \myvec{2 \\ -3 \\ 6} \\
+    &= (-4)(2) + (0)(-3) + (-2)(6) \\
+    &= -8 + 0 - 12 = -20.
+\end{align}
+
+The magnitude of the direction vector $\vec{b}$ is:
+\begin{align}
+    \lVert \vec{b} \rVert &= \sqrt{2^2 + (-3)^2 + 6^2} \\
+    &= \sqrt{4 + 9 + 36} = \sqrt{49} = 7.
+\end{align}
+\end{frame}
+\begin{frame}
+Substituting these values into the formula for the squared distance:
+\begin{align}
+    d^2 
+    &= (\vec{a_2} - \vec{a_1})^\top (\vec{a_2} - \vec{a_1})
+    - \left( \frac{ (\vec{a_2} - \vec{a_1})^\top \vec{b} }{ \lVert \vec{b} \rVert } \right)^2 \\[6pt]
+    &= 20 - \left( \frac{-20}{7} \right)^2 \\[6pt]
+    &= 20 - \frac{400}{49} \\[6pt]
+    &= \frac{20 \times 49 - 400}{49} \\[6pt]
+    &= \frac{980 - 400}{49} \\[6pt]
+    &= \frac{580}{49}.
+\end{align}
+\end{frame}
+\begin{frame}
+Finally, the shortest distance $d$ is the square root of this value:
+\begin{align}
+    d = \sqrt{\frac{580}{49}} = \frac{\sqrt{580}}{7} = \frac{\sqrt{4 \times 145}}{7} = \frac{2\sqrt{145}}{7}.
+\end{align}
+Thus, the distance between the two parallel lines is
+\[
+\boxed{d = \frac{2\sqrt{145}}{7}}.
+\]
+\end{frame}
+\begin{frame}{Graph}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/shortest_distance.png}
+    \caption{Shortest distance between two parallel lines}
+    \label{fig:placeholder}
+\end{figure}
+
+jhuj
+
+\end{frame}
+
+\end{document}
